@@ -11,11 +11,11 @@ import box from "./img/inbox.svg";
 function Plan(props) {
   return (
     <div className="list">
-      <img src={board} style={{ width: "100%" }} />
+      <img src={board} style={{ width: "100%", overflow: "auto" }} />
       <span className="plan-content">{props.plan.title}</span>
       <span className="plan-content">{props.plan.content}</span>
       <Button
-        onClick={() => props.deletePlan(props.plan.id)}
+        onClick={() => props.deleted(props.plan.id, "todo")}
         type={"scratch"}
       ></Button>
       <Button
@@ -31,7 +31,11 @@ function Complete(props) {
     <div className="list">
       <span className="comple-content">{props.complete.title}</span>
       <span className="comple-content">{props.complete.content}</span>
-      <img src={box} style={{ width: "170%" }} />
+      <img src={box} style={{ width: "100%" }} />
+      <Button
+        onClick={() => props.deleted(props.complete.id, "complete")}
+        type={"scratch"}
+      ></Button>
       <Button
         onClick={() => props.swaping(props.complete.id, "up")}
         type={"reback"}
@@ -87,19 +91,17 @@ const App = () => {
     //setName(""); // 입력 완료후 input창 초기화
   };
 
-  const deletePlan = (id) => {
-    const newPlanList = plans.filter((plan) => plan.id !== id);
-    setPlans(newPlanList);
+  const deleted = (id, type) => {
+    type === "todo"
+      ? setPlans(plans.filter((plan) => plan.id !== id))
+      : setCompletes(completes.filter((complete) => complete.id !== id));
   };
 
   return (
     <div className="outer-container">
       <div className="inner-container">
         <div className="banner">
-          <img
-            src={toDoIcon}
-            style={{ marginTop: "2%", marginBottom: "2%", width: "15%" }}
-          />
+          <img src={toDoIcon} />
         </div>
         <div className="input-group mb-3">
           <input
@@ -125,10 +127,7 @@ const App = () => {
         </div>
 
         <div className="icon">
-          <img
-            src={angry}
-            style={{ marginTop: "2%", marginBottom: "2%", width: "7%" }}
-          />
+          <img src={angry} />
         </div>
         <div className="todo-list">
           {plans.map((plan) => {
@@ -139,7 +138,7 @@ const App = () => {
                   <Plan
                     plan={plan}
                     key={plan.id}
-                    deletePlan={deletePlan}
+                    deleted={deleted}
                     swaping={swaping}
                   />
                 </div>
@@ -148,10 +147,7 @@ const App = () => {
           })}
         </div>
         <div className="icon">
-          <img
-            src={wink}
-            style={{ marginTop: "2%", marginBottom: "2%", width: "7%" }}
-          />
+          <img src={wink} />
         </div>
         <div className="todo-list-completed">
           {completes.map((complete) => {
@@ -162,6 +158,7 @@ const App = () => {
                   <Complete
                     complete={complete}
                     key={complete.id}
+                    deleted={deleted}
                     swaping={swaping}
                   />
                 </div>
