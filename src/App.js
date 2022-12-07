@@ -11,7 +11,7 @@ import box from "./img/inbox.svg";
 function Plan(props) {
   return (
     <div className="list">
-      <img src={board} style={{ width: "100%", overflow: "auto" }} />
+      <img src={board} style={{ width: "100%" }} />
       <span className="plan-content">{props.plan.title}</span>
       <span className="plan-content">{props.plan.content}</span>
       <Button
@@ -111,7 +111,7 @@ const App = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <span
-            class="input-group-text"
+            className="input-group-text"
             id="basic-addon2"
             style={{ background: "#54BD54" }}
           >

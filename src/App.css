@@ -68,15 +68,15 @@
 }
 
 .icon img {
-  margin-top: 5%;
-  margin-bottom: 2%;
+  /* margin-top: 5%; */
+  /* margin-bottom: 2%; */
   width: 7%;
 }
 
 .complete-list {
   width: 100%;
   height: 100%;
-  display: block;
+  display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -90,8 +90,8 @@
 }
 
 .banner img {
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 7%;
+  margin-bottom: 7%;
   width: 15%;
 }
 
